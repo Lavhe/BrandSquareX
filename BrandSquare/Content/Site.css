@@ -1,0 +1,284 @@
+﻿@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/roboto/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/roboto/Roboto-Regular.ttf') format('truetype');
+}
+
+nav {
+    max-height: 70px;
+    min-height: 50px;
+}
+
+body {
+    padding-top: 10px;
+    padding-bottom: 70px;
+    font-family: Roboto-Regular;
+    background-color: #fafafa;
+}
+
+h4 {
+    font-family: Roboto-Bold;
+}
+
+.Post_Header {
+    padding: 6px 1px 1px 5px;
+    box-sizing: padding-box;
+    border-bottom: 1px solid grey;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.activator {
+    position: relative;
+    left: 10px;
+}
+
+    .activator i {
+        position: absolute;
+        top: -15px;
+        text-align: start;
+    }
+
+.Post_Header_Right {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+.Post_Header_Left {
+    left: -25px;
+}
+
+.Post_Header_Img {
+    width: 80px;
+    height: 50px;
+}
+
+    .Post_Header_Img img {
+        border: 1px ridge grey;
+        border-radius: 50%;
+    }
+
+.Post_Body_Date {
+    margin-left: -24px;
+}
+
+.Post_Footer {
+    border-top: 1px outset grey;
+    border-radius: 30px;
+}
+
+/*LOADING LOADING LOADING*/
+
+.loadingDivFather {
+    height: 40px;
+}
+
+.loadingDiv {
+    background-color: #000;
+    position: relative;
+}
+
+@-webkit-keyframes animIn {
+    0% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+        opacity: 0;
+    }
+}
+
+@keyframes animIn {
+    0% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+        opacity: 0;
+    }
+}
+
+.loading {
+    left: 50%;
+}
+
+    .loading .bullet {
+        position: absolute;
+        padding: 2px;
+        border-radius: 50%;
+        -webkit-animation: animIn 3.5s alternate-reverse 0s infinite;
+        animation: animIn 3.5s alternate-reverse 0s infinite;
+    }
+
+        .loading .bullet:nth-child(1) {
+            -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+            color: red;
+        }
+
+        .loading .bullet:nth-child(2) {
+            -webkit-animation-delay: .5s;
+            animation-delay: .5s;
+            color: crimson;
+        }
+
+        .loading .bullet:nth-child(3) {
+            -webkit-animation-delay: 1s;
+            animation-delay: 1s;
+            color: purple;
+        }
+
+        .loading .bullet:nth-child(4) {
+            -webkit-animation-delay: 1.5s;
+            animation-delay: 1.5s;
+            color: blue;
+        }
+
+        .loading .bullet:nth-child(5) {
+            -webkit-animation-delay: 2s;
+            animation-delay: 2s;
+            color: dodgerblue;
+        }
+
+        .loading .bullet:nth-child(6) {
+            -webkit-animation-delay: 2.5s;
+            animation-delay: 2.5s;
+            color: teal;
+        }
+
+        .loading .bullet:nth-child(7) {
+            -webkit-animation-delay: 3s;
+            animation-delay: 3s;
+            color: midnightblue;
+        }
+
+/*END END END LOADING*/
+
+
+/****IMAGE UPLOADING*/
+.image-editor {
+    opacity: 0.9;
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: 0px 5px 20px 2px;
+}
+
+.range-field span {
+    display: none;
+}
+
+/* Show load indicator when image is being loaded */
+.cropit-preview.cropit-image-loading .spinner {
+    opacity: 1;
+}
+
+#ThepicX {
+    cursor: move;
+    opacity: 0.8;
+    box-shadow: 1px 5px 20px 5px grey;
+}
+
+.cropit-preview-image-container {
+    cursor: move;
+}
+
+.cropit-preview-background {
+    opacity: 0.5;
+    cursor: auto;
+}
+
+#ThepicX {
+    /* Use relative position to prevent from being covered by image background */
+    position: relative;
+    z-index: 3;
+}
+
+    #ThepicX p {
+        z-index: 10;
+    }
+
+/***END IMAGE UPLOADING*/
+
+.small {
+    font-size: small;
+}
+
+.PostTypeChooser {
+    position: sticky;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.fullSize {
+    height: 100%;
+    width: 100%;
+}
+
+.adsColumn {
+    height:100%;
+    position:fixed;
+    overflow-y:scroll;
+}
+/*************
+    Socials editting */
+.social-list {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.socialsAnimate span {
+    font-size: small;
+}
+
+/*************/
+
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    background: #66bb6a;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: transparent;
+    }
+/**END SCROLLBAR*/

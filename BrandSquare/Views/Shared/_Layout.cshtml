@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body @ViewBag.Title class="fixed-sn grey-skin">
+    <div id="Xapp">
+        @if (BrandSquare.Classes.X.GetBrand<BrandSquare.Models.Brand>(Session, true) == null)
+        {
+            <x-login :login-brandname="LoginBrandname" :login-brandlogo="LoginBrandlogo" :login-brand-name-found="LoginBrandNameFound"></x-login>
+        }
+        <nav class="navbar navbar-fixed-bottom navbar-light grey lighten-3 row">
+            @if (BrandSquare.Classes.X.GetBrand<BrandSquare.Models.Brand>(Session, true) == null)
+            {
+                <div class="col-xs-2 col-md-3">
+                    <a class="btn btn-floating transparent waves-circle waves-effect" role="button" data-toggle="modal" data-target="#modal-login">
+                        <i class="fa fa-3x fa-user black-text"></i>
+                    </a>
+                </div>
+            }
+            else
+            {
+                var brand = BrandSquare.Classes.X.GetBrand<BrandSquare.Models.Brand>(Session, true);
+                <div class="col-xs-2 col-md-3">
+                    <a class="btn btn-floating transparent waves-circle waves-effect" data-toggle="popover">
+                        <i>
+                            <img style="width:100%;height:100%" class="img-fluid img-circle" src="@brand.BrandLogo" />
+                        </i>
+                    </a>
+                    <a class="btn btn-floating transparent waves-circle waves-effect" href="@Url.Action("b","Brand",new { brandName = brand.BrandName})">
+                        <i class="fa fa-plus black-text">
+
+                        </i>
+                    </a>
+                </div>
+            }
+            <div class="col-xs-6 offset-xs-1 col-md-4 offset-md-1 waves-effect" role="button" onclick="window.location.href='@Url.Action("Index","Home")'">
+                <img src="~/Content/images/logo/BrandSqaure_transparent.png" style="width:100%;height:68px" class="img-fluid text-xs-center flex-center" />
+            </div>
+            <div class="col-xs-2 col-md-3 pull-md-right">
+                <a class="btn btn-floating waves-circle transparent waves-effect pull-md-right" href="@Url.Action("About","Home")">
+                    <i class="fa fa-3x fa-info black-text"></i>
+                </a>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            @RenderBody()
+            <hr />
+            <footer id="FooterX">
+                <p>&copy; @DateTime.Now.Year - BrandSquare</p>
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

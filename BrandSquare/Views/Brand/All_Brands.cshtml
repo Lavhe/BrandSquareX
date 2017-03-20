@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "all brands";
+}
+
+<span class="hidden-lg-down BrandController"></span>
+
+<div class="row">
+    <div class="col-xs-4">
+        <div class="card card-block">
+            <div class="row">
+                <div class="col-xs-12 text-xs-center green-text">
+                    <h5>Sort By</h5>
+                </div>
+                <div class="col-xs-12 row">
+                    <div class="col-xs-6 green-text">
+                        <label>Category </label>
+                        <select>
+                            <option>Me</option>
+                            <option>Me</option>
+                            <option>Me</option>
+                            <option>Me</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-4">
+        <div class="card card-block">
+            <div class="row">
+                <div class="col-xs-12 text-xs-center green-text">
+                    <h5>Filter By</h5>
+                </div>
+                <div class="col-xs-12 row">
+                    <div class="col-xs-6 green-text">
+                        <label>Category </label>
+                        <select>
+                            <option>Me</option>
+                            <option>Me</option>
+                            <option>Me</option>
+                            <option>Me</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-4">
+        <div class="card card-block">
+            <div class="row">
+                <div class="col-xs-12 text-xs-center green-text">
+                    <h5>Search</h5>
+                </div>
+                <div class="col-xs-12 text-xs-center row">
+                    <input id="txtSearch" class="md-textarea" length="100" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @for (int i = 0; i < 100; i++)
+    {
+        <div class="col-xs-6 col-md-4 col-xl-3">
+            <div class="card">
+                <div class="card-title">
+                    <div class="Post_Header row fullWidth">
+                        <div class="col-xs-5 text-xs-left left">
+                            <x-image-modal v-bind:img-src="'/Content/images/avatars/img (8).jpg'"></x-image-modal>
+                        </div>
+                        <div class="col-xs-7 row">
+                            <div class="col-xs-12 text-xs-left">
+                                <h4 class="h4-responsive"><a>Uzzie</a></h4>
+                            </div>
+                            <div class="col-xs-12 text-xs-left">
+                                <i class="fa fa-dot-circle-o"></i> <span><a>Artist</a></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <x-socials></x-socials>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 green-text">
+                                <small>Uzzie's progress</small>
+                            </div>
+                            <div class="col-xs-4 offset-xs-1 row">
+                                <div class="col-xs-12 text-xs-center">
+                                    <h6>
+                                        Events
+                                    </h6>
+                                </div>
+                                <div class="col-xs-12 text-xs-center">
+                                    <p>1002</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 offset-xs-1 row pull-right">
+                                <div class="col-xs-12 text-xs-center">
+                                    <h6>
+                                        Sales
+                                    </h6>
+                                </div>
+                                <div class="col-xs-12 text-xs-center">
+                                    <p>2200</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

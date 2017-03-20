@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-xs-8 col-md-8">
+        <div class="row">
+            <div class="col-xs-12 text-xs-center green-text">
+                <h5>Upcoming events</h5>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <x-upcoming-events></x-upcoming-events>
+            </div>
+        </div>
+        <hr class="fullWidth" />
+        <x-posts></x-posts>
+    </div>
+    <div class="col-xs-4 col-md-4 row push-xs-8 push-md-8 pull-right adsColumn">
+        <div class="col-xs-12 text-xs-center green-text">
+            <h5>Ads</h5>
+        </div>
+        <div class="col-xs-12">
+            <div class="card card-block row">
+                <div class="col-xs-12 green-text">
+                    <label>Top Brands</label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-xs-center">
+                        <div class="chip hoverable" role="button">
+                            <img src="~/Content/images/avatars/img (6).jpg" class="img-fluid" alt="Contact Person"><p class="text-truncate">Jane Doe</p>
+                        </div>
+                        <div class="chip hoverable" role="button">
+                            <img src="~/Content/images/avatars/img (3).jpg" class="img-fluid" alt="Contact Person"><p class="text-truncate">Uzzie Lavhe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="card card-block hoverable waves-effect" role="button">
+                <p class="text-xs-center flex-center">View all brands</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="card card-block hoverable waves-effect" role="button">
+                <p class="text-xs-center flex-center"><i class="fa fa-search fa-2x"></i></p>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="card card-block fullWidth">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card card-block grey lighten-5">
+                            <div class="row">
+                                <div class="col-xs-12 text-xs-center green-text">
+                                    <h5>Latest news</h5>
+                                </div>
+                                <div class="col-xs-7 green-text">
+                                    <a href=""><label>Uzzie</label></a>
+                                </div>
+                                <div class="col-xs-5 pull-right text-xs-right" data-toggle="tooltip" data-placement="top" title="Today" role="button">
+                                    <p class="small fullWidth text-truncate">
+                                        <small><i class="fa fa-clock-o"></i> 12:10 </small>
+                                    </p>
+                                </div>
+                                <div class="col-xs-12 text-xs-center">
+                                    <p class="card-text fullWidth">
+                                        We are about to do a video shoot stay tuned
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="card card-block grey lighten-5">
+                            <div class="row">
+                                <div class="col-xs-7 green-text">
+                                    <a href=""><label>Mizo Phyll</label></a>
+                                </div>
+                                <div class="col-xs-5 pull-right text-xs-right" data-toggle="tooltip" data-placement="top" title="Today" role="button">
+                                    <p class="small fullWidth text-truncate">
+                                        <small><i class="fa fa-clock-o"></i> 12:10 </small>
+                                    </p>
+                                </div>
+                                <div class="col-xs-12 text-xs-center">
+                                    <p class="card-text fullWidth">
+                                        Venda nga december is around the corner soo stay tuned.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
