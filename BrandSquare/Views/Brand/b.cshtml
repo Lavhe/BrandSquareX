@@ -9,42 +9,7 @@
 
 <x-addsomething></x-addsomething>
 <div class="row">
-    <br/>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-6">
-        <div class="card card-block transparent">
-            <textarea id="txtStatus" class="md-textarea" length="100" v-model="txtStatus"></textarea>
-            <label for="txtStatus">Update current situation</label>
-        </div>
-    </div>
-    <div class="col-xs-12 col-md-6">
-        <div class="card card-block grey lighten-5">
-            <div class="row">
-                <div class="col-xs-6 green-text">
-                    <label>Current status</label>
-                </div>
-                <div class="col-xs-6 pull-right text-xs-right" data-toggle="tooltip" data-placement="top" title="Today" role="button">
-                    <i class="fa fa-clock-o"></i>
-                    <span class="small small-tag">
-                        <label>12:10 </label>
-                    </span>
-                </div>
-                <div class="col-xs-12 text-xs-center">
-                    <p class="card-text fullWidth">
-                        {{ txtStatus }}
-                    </p>
-                </div>
-                <hr style="width:100%" />
-                <div class="col-xs-12">
-                    <label class="text-xs-right pull-right small">
-                        <sup>{{ txtStatusCounter }}</sup>
-                    </label>
-                    <a class="btn btn-success fullWidth" v-bind:class="{'disabled':txtStatusCounter < 0}">Update</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <br />
 </div>
 
 <hr class="fullWidth" />

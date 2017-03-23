@@ -562,6 +562,409 @@ Vue.component('x-loading', {
               </div>`
 });
 
+
+
+Vue.component('x-addSales', {
+    template: `
+            <div>
+            <div class="row card animated rotateInDownRight">
+                <div class="col-xs-12 row">
+                    <div class="col-md-6">
+                        <div class="image-editor row depth-z-0 center text-xs-center">
+                                <div class="file-field text-xs-center col-md-6 offset-md-3">
+                                    <div role="button" class="btn btn-primary center text-xs-center btn-sm waves-effect">
+                                        <span>Select Image to Upload</span>
+                                        <input type="file" accept="image/*" v-on:click="AttachCropIt" class="cropit-image-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-form form-group">
+                                <textarea class="md-textarea" v-model="Sales_Description" v-bind:class="{'invalid':SalesDescriptionError,'valid':!SalesDescriptionError}" length="20"></textarea>
+                        </div>
+                        <hr />
+                        <div class="md-form input-group">
+                            <span class="input-group-addon">R</span>
+                            <input type="number" v-model.number="Sales_Price" v-bind:class="{'invalid':SalesPriceError,'valid':!SalesPriceError}" class="form-control" length="4" aria-label="Amount (to the nearest Rand)">
+                            <span class="input-group-addon">.00</span>
+                        </div>
+                        <hr />
+                        <div class="md-form">
+                            <select class="mdb-select" v-model="SalesCategory">
+                                <optgroup label="Music">
+                                    <option value="Album Launch">Album Launch</option>
+                                    <option value="Artist Birthday">Artist Birthday</option>
+                                </optgroup>
+                                <optgroup label="Fashion">
+                                    <option value="Fashion Show">Fashion Show</option>
+                                    <option value="Just Nje!">Just Nje!</option>
+                                </optgroup>
+                            </select>
+                            <label>Event Type</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="card narrower">
+                                <div class="card-title">
+                                    <div class="Post_Header row">
+                                        <div class="Post_Header_Img col-xs-1 text-xs-left left">
+                                            <img v-bind:src="LoggedInBrand.Logo" style="width:100%;height:100%" id="TheImage" class="img-fluid" />
+                                        </div>
+                                        <div class="Post_Header_Left col-xs-9 row">
+                                            <div class="col-xs-12 text-xs-left">
+                                                <h4 class="h4-responsive"><a>{{ LoggedInBrand.Name }}</a></h4>
+                                            </div>
+                                            <div class="col-xs-12 text-xs-left">
+                                                <span><a>{{ LoggedInBrand.Category }}</a></span> <i class="fa fa-dot-circle-o"></i> {{ SalesCategory }} Event
+                                            </div>
+                                        </div>
+                                        <div class="Post_Header_Right col-xs-2 text-xs-right right">
+                                            <div class="tag tag-danger">NEW</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pull-xs-right" style="border:1px solid black">
+                                        <div style="width:20px;height:20px" v-on:click="DescriptionText(false)" class="white waves-effect col-xs-1" role="button"></div>
+                                        <div style="width:20px;height:20px" v-on:click="DescriptionText(true)" class="black waves-effect col-xs-1" role="button"></div> 
+                                </div>
+                                <form class="range-field">
+                                        <input id="TheZoomer" type="range" />
+                                </form>
+                                <a class="rotate-ccw ImageEdit btn-floating transparent waves-effect pull-xs-left" onclick="{$('.image-editor').cropit('rotateCCW');}"><i class="fa fa-rotate-left black-text"></i></a>
+                                <a class="rotate-cw ImageEdit btn-floating transparent waves-effect pull-xs-right" onclick="{$('.image-editor').cropit('rotateCW');}"><i class="fa fa-rotate-right black-text"></i></a>
+                                <div id="ThepicX" v-bind:class="{'hm-white-strong':DescriptionTextColour,'hm-black-strong':!DescriptionTextColour}" class="view hm-zoom overlay text-xs-center flex-center waves-effect">
+                                    <img style="width:100%;height:100%" class="img-fluid " alt="">
+                                    <div class="mask flex-center">
+                                        <p v-bind:class="{'black-text':DescriptionTextColour,'white-text':!DescriptionTextColour}">{{ Sales_Description }}</p>
+                                    </div>
+                                </div>
+                                          
+                                <div class="card-share">
+                                    <div class="social-reveal">
+                                        <a type="button" class="btn-floating btn-fb"><i class="fa fa-facebook"></i></a>
+                                        <a type="button" class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
+                                        <a type="button" class="btn-floating btn-gplus"><i class="fa fa-instagram"></i></a>
+                                    </div>
+                                    <a class="btn-floating btn-action share-toggle white"><i class="fa fa-share-alt black-text"></i></a>
+                                </div>
+                                <div class="card-link row Post_Footer">
+                                    <div class="col-xs-3">
+                                        <a class="btn btn-floating btn-small waves-effect waves-circle transparent activator"><i class="fa fa-phone green-text animated tada infinite"></i></a>
+                                    </div>
+                                    <div class="col-xs-6 center text-xs-center animated pulse infinite">
+                                        <span class="center tag tag-danger">
+                                            <span>R</span> {{ Sales_Price }}
+                                        </span>
+                                    </div>
+                                </div>
+                                    <div class="card-reveal">
+                                        <div class="content text-xs-center">
+                                               <h4 class="card-title">Social shares <i class="fa fa-close"></i></h4>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <a class="btn teal waves-effect waves-button export ImageEdit" style="width:100%" onclick="{ var imageData = $('.image-editor').cropit('export'); window.open(imageData); }">Save Changes</a>
+                            </div>
+                        </div>
+                    </div>
+                    `,
+    data: function () {
+        return {
+            post: PostCard,
+            ShowAddSales: false,
+            ShowEvent_Sales: false,
+            SalesDescription: 'Describe your product...',
+            SalesDescriptionError: false,
+            SalesPrice: '0',
+            SalesPriceError: '0',
+            SalesCategory: '',
+            SalesImage: '',
+            LoggedInBrand: Brand,
+            DescriptionTextColour: true
+        }
+    },
+    computed: {
+        Sales_Description: {
+            get: function () {
+                return this.SalesDescription;
+            },
+            set: function (val) {
+                if (val.length > 20) {
+                    this.SalesDescriptionError = true;
+                } else if (val.length <= 0) {
+                    this.SalesDescriptionError = true;
+                } else {
+                    this.SalesDescriptionError = false;
+                    this.SalesDescription = val;
+                }
+            },
+        },
+        Sales_Price: {
+            get: function () {
+                return this.SalesPrice;
+            },
+            set: function (val) {
+                if (val.length > 4) {
+                    this.SalesPriceError = true;
+                } else if (val.length <= 0) {
+                    this.SalesPrice = 0;
+                    this.SalesPriceError = true;
+                } else {
+                    this.SalesPriceError = false;
+                    this.SalesPrice = val;
+                }
+            },
+        }
+    },
+    mounted: function () {
+        this.AttachCropIt();
+        Initialize();
+        this.LoggedInBrand = LoggedInBrand;
+    },
+    methods: {
+        DescriptionText: function (color) {
+            this.DescriptionTextColour = color;
+        },
+        AttachCropIt: function () {
+            $('.image-editor').cropit({
+                maxZoom: 2,
+                imageBackground: true,
+                imageState: {
+                    src: '/Content/images/avatars/img (10).jpg',
+                },
+                smallImage: 'allow',
+                width: 410,
+                height: 290,
+                freeMove: true,
+                $preview: $('#ThepicX'),
+                $zoomSlider: $('#TheZoomer'),
+                onZoomDisabled: function () {
+                    $('#TheZoomer').hide('slow');
+                },
+                onZoomEnabled: function () {
+                    $('#TheZoomer').show('slow');
+                }
+            });
+
+        }
+    }
+});
+
+Vue.component('x-addEvent', {
+    template: `
+                <div>
+                    <div class="row jumbotron animated rotateInDownLeft">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="col-xs-3">
+                                    <div class="md-form form-group">
+                                        <textarea class="md-textarea" v-model="Event_Name" v-bind:class="{'invalid':EventNameError,'valid':!EventNameError}" length="20"></textarea>
+                                    </div>
+                                    <hr />
+                                    <div class="md-form">
+                                        <input placeholder="Select a date" type="date" v-model="EventDate" class="form-control datepicker">
+                                    </div>
+                                    <hr />
+                                    <div class="md-form input-group">
+                                        <span class="input-group-addon">R</span>
+                                        <input type="number" v-model.number="Event_Price" v-bind:class="{'invalid':EventPriceError,'valid':!EventPriceError}" class="form-control" length="4" aria-label="Amount (to the nearest Rand)">
+                                        <span class="input-group-addon">.00</span>
+                                    </div>
+                                    <hr />
+                                    <div class="md-form">
+                                        <select class="mdb-select" v-model="EventCategory">
+                                            <optgroup label="Music">
+                                                <option value="Album Launch">Album Launch</option>
+                                                <option value="Artist Birthday">Artist Birthday</option>
+                                            </optgroup>
+                                            <optgroup label="Fashion">
+                                                <option value="Fashion Show">Fashion Show</option>
+                                                <option value="Just Nje!">Just Nje!</option>
+                                            </optgroup>
+                                        </select>
+                                        <label>Event Type</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="card-wrapper">
+                                        <div class="card-rotating effect__click">
+                                            <div class="face front">
+                                                <div class="card">
+                                                    <div class="card-title">
+                                                        <div class="Post_Header row">
+                                                            <div class="Post_Header_Img col-xs-1 text-xs-left left">
+                                                                <img v-bind:src="LoggedInBrand.Logo" style="width:100%;height:100%" class="img-fluid" />
+                                                            </div>
+                                                            <div class="Post_Header_Left col-xs-9 row">
+                                                                <div class="col-xs-12 text-xs-left">
+                                                                    <h4 class="h4-responsive"><a>{{ LoggedInBrand.Name }}</a></h4>
+                                                                </div>
+                                                                <div class="col-xs-12 text-xs-left">
+                                                                    <span><a>{{ LoggedInBrand.Category }}</a></span> <i class="fa fa-dot-circle-o"></i> {{ EventCategory }} Event
+                                                                </div>
+                                                            </div>
+                                                            <div class="Post_Header_Right col-xs-2 text-xs-right right">
+                                                                <div class="tag tag-danger">R{{Event_Price}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card-block text-xs-center">
+                                                        <div class="view overlay hm-white-slight text-xs-center flex-center">
+                                                            <h2 class="text-xs-center h2-responsive">
+                                                                {{Event_Name}}
+                                                            </h2>
+                                                            <a>
+                                                                <div class="mask"></div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card-share">
+                                                        <div class="social-reveal">
+                                                            <a class="btn-floating btn-fb"><i class="fa fa-facebook"></i></a>
+                                                            <a class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
+                                                            <a class="btn-floating btn-gplus"><i class="fa fa-instagram"></i></a>
+                                                        </div>
+                                                        <a class="btn-floating btn-action share-toggle white"><i class="fa fa-share-alt black-text"></i></a>
+                                                    </div>
+
+                                                    <div class="card-link row Post_Footer">
+                                                        <div class="col-xs-3">
+                                                            <a class="left btn btn-floating btn-small waves-effect waves-circle transparent activator"><i class="fa fa-phone green-text animated tada infinite"></i></a>
+                                                        </div>
+                                                        <div class="col-xs-6 text-xs-center">
+                                                            <a class="left btn btn-info-outline btn-sm waves-effect rotate-btn" id="BtnEventGoToLineup" data-card="EventCard___Model.BrandID">Line Up</a>
+                                                        </div>
+                                                        <div class="col-xs-3">
+                                                            <br />
+                                                            <span class="center text-xs-center small comment-date Post_Body_Date">{{EventDate}}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card-reveal">
+                                                        <div class="content text-xs-center">
+                                                            <h6 class="card-title">Contact US<i class="fa fa-close"></i></h6>
+                                                            <hr>
+                                                            <ul class="list-group">
+                                                                <li class="list-group-item">Facebook</li>
+                                                                <li class="list-group-item">Twitter</li>
+                                                                <li class="list-group-item">Instagram</li>
+                                                                <li class="list-group-item">FBI Crew</li>
+                                                                <li class="list-group-item">John Cena</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="face back">
+                                                <h6><i class="fa fa-map-marker"></i> Makhuvha Stadium   <a class="rotate-btn right text-xs-right" data-card="EventCard___Model.BrandID"><i class="fa fa-close"></i></a></h6>
+                                                <hr>
+                                                <ul class="list-group" id="EventLineUp" style="height:80%;overflow-y:scroll">
+                                                    <li class="list-group-item">
+                                                        <span class="tag transparent label-pill pull-xs-right"><i class="fa fa-trash fa-2x red-text"></i>Mizo Phyll</span>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="tag transparent label-pill pull-xs-right"><i class="fa fa-trash fa-2x red-text"></i>Racha Kill</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="md-form form-group">
+                                        <label for="TxtEventLineup">Line Up</label>
+                                        <input v-on:keyup.enter="AddToLineup" placeholder="+Artist" v-model="TxtEventLineup" id="TxtEventLineup" class="md-textarea XBindable" data-ParentDiv="#EventCard___Model.BrandID" data-XBindie="#CurrentEventLineup" length="20" type="text" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="chips col-xs-12">
+                                            <div class="chip" v-on:click="RemoveCurrentLineup(value)" role="button" v-for="value in Lineup">
+                                                {{value}} <i class="close"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <a class="btn teal waves-effect waves-button" style="width:100%">Save Changes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            `,
+    data: function () {
+        return {
+            TxtEventLineup: '',
+            Lineup: ['Uzzie', 'Joe', 'Me'],
+            post: PostCard,
+            EventName: 'Name of event...',
+            EventNameError: false,
+            EventDate: '',
+            EventPrice: '0',
+            EventPriceError: '0',
+            EventCategory: '',
+            LoggedInBrand: Brand
+        }
+    },
+    computed: {
+        Event_Name: {
+            get: function () {
+                return this.EventName;
+            },
+            set: function (val) {
+                if (val.length > 20) {
+                    this.EventNameError = true;
+                } else if (val.length <= 0) {
+                    this.EventNameError = true;
+                } else {
+                    this.EventNameError = false;
+                    this.EventName = val;
+                }
+            },
+        },
+        Event_Price: {
+            get: function () {
+                return this.EventPrice;
+            },
+            set: function (val) {
+                if (val.length > 4) {
+                    this.EventPriceError = true;
+                } else if (val.length <= 0) {
+                    this.EventPrice = 0;
+                    this.EventPriceError = true;
+                } else {
+                    this.EventPriceError = false;
+                    this.EventPrice = val;
+                }
+            },
+        }
+    },
+    mounted: function () {
+        $(window).resize();
+        Initialize();
+        this.LoggedInBrand = LoggedInBrand;
+    },
+    methods: {
+        AddToLineup: function () {
+            var value = this.TxtEventLineup;
+            if (value.length > 2) {
+                this.Lineup.push(value);
+                this.TxtEventLineup = '';
+            }
+        },
+        RemoveCurrentLineup: function (value: string) {
+            var index = this.Lineup.indexOf(value);
+            if (index >= 0) {
+                this.Lineup.splice(index, 1);
+            }
+        },
+    }
+});
+
 $(window).resize(() => {
     $('.card-wrapper').css('height', $('.card-wrapper').find('.card').css('height'));
 });
@@ -594,7 +997,7 @@ $(document).ready(function () {
                                     </a>
                                 </div>
                             </div>
-                   </div>
+                        </div>
                  </div>`,
                 data: function () {
                     return {
@@ -674,12 +1077,12 @@ $(document).ready(function () {
                                             <p>Add post</p>
                                         </div>
                                         <div class="col-xs-6">
-                                            <a class="btn btn-flat waves-effect black-text">
+                                            <a class="btn btn-flat waves-effect black-text" v-on:click="addEvent = true;addSales = false;">
                                                 Event
                                             </a>
                                         </div>
                                         <div class="col-xs-6">
-                                            <a class="btn btn-flat waves-effect black-text">
+                                            <a class="btn btn-flat waves-effect black-text" v-on:click="addSales = true;addEvent = false;">
                                                 Sales
                                             </a>
                                         </div>
@@ -689,7 +1092,7 @@ $(document).ready(function () {
                         </div>
                         <div v-if="!isAdd" class="col-xs-4 col-md-4" v-bind:class="{'col-xs-12 col-md-12':isRemove}">
                             <div class="card card-block" v-bind:class="{'grey lighten-1':isRemove,'hoverable waves-effect':!isRemove}" role="button">
-                              <div v-if="!isRemove" class="fullSize" v-on:click="isRemove = !isRemove">
+                                <div v-if="!isRemove" class="fullSize" v-on:click="isRemove = !isRemove">
                                     <p class="text-xs-center flex-center">
                                         Remove
                                     </p>
@@ -712,16 +1115,70 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                                 </div>
+                            </div>  
+                        </div>
+                        <div v-if="!isAdd && !isRemove && isStatus" class="row">
+                            <div class="col-xs-12 col-md-8 offset-md-2">
+                                <div class="card card-block grey lighten-5">
+                                    <div class="row">
+                                        <div class="col-xs-6 green-text">
+                                            <label>Current status</label>
+                                        </div>
+                                        <div class="col-xs-6 pull-right text-xs-right" data-toggle="tooltip" data-placement="top" title="Today" role="button">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span class="small small-tag">
+                                                <label>12:10 </label>
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-12 text-xs-center">
+                                            <p class="card-text fullWidth">
+                                                <textarea id="txtStatus" class="md-textarea" v-bind:class="{'red-text':txtStatusCounter < 0}" length="100" v-model="txtStatus"></textarea>
+                                                <label for="txtStatus">Update current situation</label>
+                                            </p>
+                                        </div>
+                                        <hr style="width:100%" />
+                                        <div class="col-xs-12">
+                                            <label class="text-xs-right pull-right small">
+                                                <sup>{{ txtStatusCounter }}</sup>
+                                            </label>
+                                            <a class="btn btn-success fullWidth" v-bind:class="{'disabled':txtStatusCounter < 0}">Update</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p v-if="addSales">In it to win it</p>
+                                <x-addSales v-if="addSales"></x-addSales>
+                                <x-addEvent v-if="addEvent"></x-addEvent>
                             </div>
                         </div>
                     </div>
                 </div>
                         `,
-                data: function(){
+                data: function () {
                     return {
                         isStatus: true,
                         isAdd: false,
-                        isRemove:false,
+                        isRemove: false,
+                        addSales: false,
+                        addEvent:false,
+                        txtStatusCounter: 100,
+                        brandStatus: ''
+                    }
+                },
+                computed: {
+                    txtStatus: {
+                        get: function () {
+                            return this.brandStatus;
+                        },
+                        set: function (val: string) {
+                            this.txtStatusCounter = (100 - val.length);
+                            if (this.txtStatusCounter > 0) {
+                                this.brandStatus = val;
+                            }
+                        },
                     }
                 }
             });
@@ -1091,144 +1548,7 @@ $(document).ready(function () {
                         </div>
                     </div>
 
-                    <div class="row jumbotron" v-if="ShowAddEvent && ShowEvent_Sales" v-bind:class="{'animated rotateInDownLeft':ShowAddEvent}">
-                        <div class="col-xs-12">
-                            <div class="card">
-                                <div class="col-xs-3">
-                                    <div class="md-form form-group">
-                                        <textarea class="md-textarea" v-model="Event_Name" v-bind:class="{'invalid':EventNameError,'valid':!EventNameError}" length="20"></textarea>
-                                    </div>
-                                    <hr />
-                                    <div class="md-form">
-                                        <input placeholder="Select a date" type="date" v-model="EventDate" class="form-control datepicker">
-                                    </div>
-                                    <hr />
-                                    <div class="md-form input-group">
-                                        <span class="input-group-addon">R</span>
-                                        <input type="number" v-model.number="Event_Price" v-bind:class="{'invalid':EventPriceError,'valid':!EventPriceError}" class="form-control" length="4" aria-label="Amount (to the nearest Rand)">
-                                        <span class="input-group-addon">.00</span>
-                                    </div>
-                                    <hr />
-                                    <div class="md-form">
-                                        <select class="mdb-select" v-model="EventCategory">
-                                            <optgroup label="Music">
-                                                <option value="Album Launch">Album Launch</option>
-                                                <option value="Artist Birthday">Artist Birthday</option>
-                                            </optgroup>
-                                            <optgroup label="Fashion">
-                                                <option value="Fashion Show">Fashion Show</option>
-                                                <option value="Just Nje!">Just Nje!</option>
-                                            </optgroup>
-                                        </select>
-                                        <label>Event Type</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="card-wrapper">
-                                        <div class="card-rotating effect__click">
-                                            <div class="face front">
-                                                <div class="card">
-                                                    <div class="card-title">
-                                                        <div class="Post_Header row">
-                                                            <div class="Post_Header_Img col-xs-1 text-xs-left left">
-                                                                <img v-bind:src="LoggedInBrand.Logo" style="width:100%;height:100%" class="img-fluid" />
-                                                            </div>
-                                                            <div class="Post_Header_Left col-xs-9 row">
-                                                                <div class="col-xs-12 text-xs-left">
-                                                                    <h4 class="h4-responsive"><a>{{ LoggedInBrand.Name }}</a></h4>
-                                                                </div>
-                                                                <div class="col-xs-12 text-xs-left">
-                                                                    <span><a>{{ LoggedInBrand.Category }}</a></span> <i class="fa fa-dot-circle-o"></i> {{ EventCategory }} Event
-                                                                </div>
-                                                            </div>
-                                                            <div class="Post_Header_Right col-xs-2 text-xs-right right">
-                                                                <div class="tag tag-danger">R{{Event_Price}}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="card-block text-xs-center">
-                                                        <div class="view overlay hm-white-slight text-xs-center flex-center">
-                                                            <h2 class="text-xs-center h2-responsive">
-                                                                {{Event_Name}}
-                                                            </h2>
-                                                            <a>
-                                                                <div class="mask"></div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="card-share">
-                                                        <div class="social-reveal">
-                                                            <a class="btn-floating btn-fb"><i class="fa fa-facebook"></i></a>
-                                                            <a class="btn-floating btn-tw"><i class="fa fa-twitter"></i></a>
-                                                            <a class="btn-floating btn-gplus"><i class="fa fa-instagram"></i></a>
-                                                        </div>
-                                                        <a class="btn-floating btn-action share-toggle white"><i class="fa fa-share-alt black-text"></i></a>
-                                                    </div>
-
-                                                    <div class="card-link row Post_Footer">
-                                                        <div class="col-xs-3">
-                                                            <a class="left btn btn-floating btn-small waves-effect waves-circle transparent activator"><i class="fa fa-phone green-text animated tada infinite"></i></a>
-                                                        </div>
-                                                        <div class="col-xs-6 text-xs-center">
-                                                            <a class="left btn btn-info-outline btn-sm waves-effect rotate-btn" id="BtnEventGoToLineup" data-card="EventCard___Model.BrandID">Line Up</a>
-                                                        </div>
-                                                        <div class="col-xs-3">
-                                                            <br />
-                                                            <span class="center text-xs-center small comment-date Post_Body_Date">{{EventDate}}</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="card-reveal">
-                                                        <div class="content text-xs-center">
-                                                            <h6 class="card-title">Contact US<i class="fa fa-close"></i></h6>
-                                                            <hr>
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item">Facebook</li>
-                                                                <li class="list-group-item">Twitter</li>
-                                                                <li class="list-group-item">Instagram</li>
-                                                                <li class="list-group-item">FBI Crew</li>
-                                                                <li class="list-group-item">John Cena</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="face back">
-                                                <h6><i class="fa fa-map-marker"></i> Makhuvha Stadium   <a class="rotate-btn right text-xs-right" data-card="EventCard___Model.BrandID"><i class="fa fa-close"></i></a></h6>
-                                                <hr>
-                                                <ul class="list-group" id="EventLineUp" style="height:80%;overflow-y:scroll">
-                                                    <li class="list-group-item">
-                                                        <span class="tag transparent label-pill pull-xs-right"><i class="fa fa-trash fa-2x red-text"></i>Mizo Phyll</span>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <span class="tag transparent label-pill pull-xs-right"><i class="fa fa-trash fa-2x red-text"></i>Racha Kill</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-3">
-                                    <div class="md-form form-group">
-                                        <label for="TxtEventLineup">Line Up</label>
-                                        <input v-on:keyup.enter="AddToLineup" placeholder="+Artist" v-model="TxtEventLineup" id="TxtEventLineup" class="md-textarea XBindable" data-ParentDiv="#EventCard___Model.BrandID" data-XBindie="#CurrentEventLineup" length="20" type="text" />
-                                    </div>
-                                    <div class="row">
-                                        <div class="chips col-xs-12">
-                                            <div class="chip" v-on:click="RemoveCurrentLineup(value)" role="button" v-for="value in Lineup">
-                                                 {{value}} <i class="close"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                <div class="col-xs-12">
-                                    <a class="btn teal waves-effect waves-button" style="width:100%">Save Changes</a>
-                                </div>
-                        </div>
-                    </div></div>`,
+                    </div>`,
                 data: function () {
                     return {
                         TxtEventLineup: '',
@@ -1390,24 +1710,9 @@ $(document).ready(function () {
             LoginBrandlogo: '',
             LoginBrandNameFound: false,
             eventPost: PostCard,
-            PostFound: false,
-            brandStatus: '',
-            txtStatusCounter: 100
+            PostFound: false
         },
         methods: {
-        },
-        computed: {
-            txtStatus: {
-                get: function () {
-                    return this.brandStatus;
-                },
-                set: function (val: string) {
-                    this.txtStatusCounter = (100 - val.length);
-                    if (this.txtStatusCounter > 0) {
-                        this.brandStatus = val;
-                    }
-                },
-            }
         },
         mounted: function () {
             //Call the resize method
