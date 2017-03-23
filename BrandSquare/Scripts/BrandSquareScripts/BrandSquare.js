@@ -436,6 +436,29 @@ Vue.component('x-addEvent', {
         },
     }
 });
+Vue.component('x-latestnews', {
+    template: " \n        <div>                \n            <div class=\"card card-block fullWidth\">\n                <div class=\"row\">\n                    <div class=\"col-xs-12 text-xs-center green-text\">\n                        <h5>Latest news</h5>\n                    </div>\n                    <div v-for=\"news in latestNews\" class=\"col-xs-12\">\n                        <x-status :poster-link.once=\"'/Brand/' + news.PosterName\"\n                                  :message.once=\"news.StatusMessage\"\n                                  :date-time=\"news.StatusTime\"\n                                  :poster-name=\"news.PosterName\"\n                                  has-name=\"true\"></x-status>\n                    </div>\n                </div>\n            </div>\n        </div>\n            ",
+    data: function () {
+        return {
+            latestNews: new Array()
+        };
+    },
+    mounted: function () {
+        var self = this;
+        $.ajax({
+            url: '/Home/GetLatestNews',
+            success: function (answer) {
+                self.latestNews = JSON.parse(answer);
+            }, error: function () {
+                toastr.error("System error : jbrgwfeoipqevmfbdk");
+            }
+        });
+    }
+});
+Vue.component('x-status', {
+    template: "\n            <div class=\"card card-block grey lighten-5\">\n                <div class=\"row\">\n                    <div class=\"col-xs-7 green-text\">\n                        <label v-if=\"hasName != 'true'\">Status</label>\n                        <a v-if=\"hasName =='true'\" v-bind:href.once=\"posterLink\">\n                            <label>\n                                {{ posterName }}\n                            </label>\n                        </a>\n                     </div>\n                    <div class=\"col-xs-5 pull-right text-xs-right\" data-toggle=\"tooltip\" data-placement=\"top\" :title=\"dateTime\" role=\"button\">\n                        <p class=\"small fullWidth\">\n                            <small>\n                                  <i class=\"fa fa-clock-o\"></i>\n                                  {{ dateTime }}\n                            </small>\n                        </p>\n                    </div>\n                    <div class=\"col-xs-12 text-xs-center\">\n                        <p class=\"card-teStatus1xt fullWidth\">\n                           {{ message }} \n                        </p>\n                    </div>\n                </div>\n            </div>\n            ",
+    props: ['dateTime', 'message', 'posterName', 'posterLink', 'hasName']
+});
 $(window).resize(function () {
     $('.card-wrapper').css('height', $('.card-wrapper').find('.card').css('height'));
 });

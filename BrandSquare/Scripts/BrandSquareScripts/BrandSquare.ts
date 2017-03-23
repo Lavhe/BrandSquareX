@@ -965,6 +965,77 @@ Vue.component('x-addEvent', {
     }
 });
 
+
+Vue.component('x-latestnews', {
+    template: ` 
+        <div>                
+            <div class="card card-block fullWidth">
+                <div class="row">
+                    <div class="col-xs-12 text-xs-center green-text">
+                        <h5>Latest news</h5>
+                    </div>
+                    <div v-for="news in latestNews" class="col-xs-12">
+                        <x-status :poster-link.once="'/Brand/' + news.PosterName"
+                                  :message.once="news.StatusMessage"
+                                  :date-time="news.StatusTime"
+                                  :poster-name="news.PosterName"
+                                  has-name="true"></x-status>
+                    </div>
+                </div>
+            </div>
+        </div>
+            `,
+    data:function() {
+        return{
+            latestNews:new Array<string[]>()
+        }
+    },
+    mounted: function () {
+        var self = this;
+        $.ajax({
+            url: '/Home/GetLatestNews',
+            success: function (answer) {
+                self.latestNews = JSON.parse(answer);
+                
+            }, error:function(){
+                toastr.error("System error : jbrgwfeoipqevmfbdk");
+            }
+        });
+    }
+});
+
+Vue.component('x-status', {
+    template: `
+            <div class="card card-block grey lighten-5">
+                <div class="row">
+                    <div class="col-xs-7 green-text">
+                        <label v-if="hasName != 'true'">Status</label>
+                        <a v-if="hasName =='true'" v-bind:href.once="posterLink">
+                            <label>
+                                {{ posterName }}
+                            </label>
+                        </a>
+                     </div>
+                    <div class="col-xs-5 pull-right text-xs-right" data-toggle="tooltip" data-placement="top" :title="dateTime" role="button">
+                        <p class="small fullWidth">
+                            <small>
+                                  <i class="fa fa-clock-o"></i>
+                                  {{ dateTime }}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="col-xs-12 text-xs-center">
+                        <p class="card-teStatus1xt fullWidth">
+                           {{ message }} 
+                        </p>
+                    </div>
+                </div>
+            </div>
+            `,
+    props:['dateTime','message','posterName','posterLink','hasName']
+});
+
+
 $(window).resize(() => {
     $('.card-wrapper').css('height', $('.card-wrapper').find('.card').css('height'));
 });
