@@ -10,9 +10,8 @@
 <div class="row card">
     <div class="col-md-7 row">
         <div class="col-sm-3 col-xs-5">
-            <x-image-modal 
-                           img-src="@Model.BrandLogo"></x-image-modal>
-            
+            <x-image-modal img-src="@Model.BrandLogo"></x-image-modal>
+
             @if (X.GetBrand<Brand>(Session, true) != null)
             {
                 if (X.GetBrand<Brand>(Session, true).BrandName == Model.BrandName)
@@ -46,25 +45,28 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-3 push-left">
-        <div class="card card-block">
-            <div class="row">
-                <div class="col-xs-6 green-text">
-                    <label>Status</label>
+        @if (Model.Status.Count > 0)
+        {
+            <div class="card card-block">
+                <div class="row">
+                    <div class="col-xs-6 green-text">
+                        <label>Status</label>
+                    </div>
+                    <div class="col-xs-6 pull-right text-xs-right" data-toggle="tooltip" data-placement="top" title="Today" role="button">
+                        <i class="fa fa-clock-o"></i>
+                        <span class="small small-tag">
+                            <label>@X.TimeAge(DateTime.Now,Model.Status.Last().DateTimePosted)</label>
+                        </span>
+                    </div>
+                    <div class="col-xs-12 text-xs-center">
+                        <span class="card-text">
+                            @Model.Status.Last().Status1
+                        </span>
+                    </div>
+                    <hr style="width:100%" />
                 </div>
-                <div class="col-xs-6 pull-right text-xs-right" data-toggle="tooltip" data-placement="top" title="Today" role="button">
-                    <i class="fa fa-clock-o"></i>
-                    <span class="small small-tag">
-                        <label>12:10 </label>
-                    </span>
-                </div>
-                <div class="col-xs-12 text-xs-center">
-                    <span class="card-text">
-                        Busy preparing for my interview
-                    </span>
-                </div>
-                <hr style="width:100%" />
             </div>
-        </div>
+        }
         <div class="card card-block">
             <div class="row">
                 <div class="col-xs-12 green-text">

@@ -18,6 +18,7 @@ namespace BrandSquare.Models
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SocialMedia> SocialMedias { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -51,6 +52,11 @@ namespace BrandSquare.Models
                 .HasMany(e => e.Sales)
                 .WithRequired(e => e.Brand)
                 .HasForeignKey(e => e.SellerID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Brand>()
+                .HasMany(e => e.Status)
+                .WithRequired(e => e.Brand)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Category>()
@@ -160,6 +166,14 @@ namespace BrandSquare.Models
                 .WithRequired(e => e.SocialMedia)
                 .HasForeignKey(e => e.BrandSocialMediaID)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Status>()
+                .Property(e => e.Status1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Status>()
+                .Property(e => e.DateTimePosted)
+                .IsUnicode(false);
         }
     }
 }

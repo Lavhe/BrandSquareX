@@ -430,7 +430,7 @@ Vue.component('x-addEvent', {
         },
         RemoveCurrentLineup: function (value) {
             var index = this.Lineup.indexOf(value);
-            if (index > 0) {
+            if (index >= 0) {
                 this.Lineup.splice(index, 1);
             }
         },
@@ -485,7 +485,7 @@ $(document).ready(function () {
             }
         });
         Vue.component('x-addsomething', {
-            template: "\n                <div>\n                    <div class=\"row text-xs-center transparent\">\n                        <div v-if=\"!isAdd && !isRemove && isStatus\" class=\"col-xs-4 col-md-4\">\n                            <div class=\"card card-block hoverable waves-effect grey lighten-1\" role=\"button\">\n                                <p class=\"text-xs-center flex-center\">\n                                    Status\n                                </p>\n                            </div>\n                        </div>\n                        <div v-if=\"!isRemove\" class=\"col-xs-4 col-md-4\" v-bind:class=\"{'col-xs-12 col-md-12':isAdd}\">\n                            <div class=\"card card-block\" v-bind:class=\"{'grey lighten-1':isAdd,'hoverable waves-effect':!isAdd}\" role=\"button\">\n                                <div v-if=\"!isAdd\" class=\"fullSize\" v-on:click=\"isAdd = !isAdd\">\n                                    <p class=\"text-xs-center flex-center\">\n                                        Add\n                                    </p>\n                                </div>\n                                <div v-else>\n                                    <div class=\"row\">\n                                        <div class=\"col-xs-12\">\n                                            <a class=\"pull-right close\" v-on:click=\"isAdd = !isAdd\"><i class=\"fa fa-close red-text\"></i></a>\n                                            <p>Add post</p>\n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-flat waves-effect black-text\" v-on:click=\"addEvent = true;addSales = false;\">\n                                                Event\n                                            </a>\n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-flat waves-effect black-text\" v-on:click=\"addSales = true;addEvent = false;\">\n                                                Sales\n                                            </a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div v-if=\"!isAdd\" class=\"col-xs-4 col-md-4\" v-bind:class=\"{'col-xs-12 col-md-12':isRemove}\">\n                            <div class=\"card card-block\" v-bind:class=\"{'grey lighten-1':isRemove,'hoverable waves-effect':!isRemove}\" role=\"button\">\n                                <div v-if=\"!isRemove\" class=\"fullSize\" v-on:click=\"isRemove = !isRemove\">\n                                    <p class=\"text-xs-center flex-center\">\n                                        Remove\n                                    </p>\n                                </div>\n                                <div v-else>\n                                    <div class=\"row\">\n                                       <div class=\"col-xs-12\">\n                                         <a class=\"pull-right close\" v-on:click=\"isRemove = !isRemove\"><i class=\"fa fa-close red-text\"></i></a>\n                                         <p>Remove post</p>                                        \n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-flat waves-effect black-text\">\n                                                Event\n                                            </a>\n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-flat waves-effect black-text\">\n                                                Sales\n                                            </a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>  \n                        </div>\n                        <div v-if=\"!isAdd && !isRemove && isStatus\" class=\"row\">\n                            <div class=\"col-xs-12 col-md-8 offset-md-2\">\n                                <div class=\"card card-block grey lighten-5\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xs-6 green-text\">\n                                            <label>Current status</label>\n                                        </div>\n                                        <div class=\"col-xs-6 pull-right text-xs-right\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Today\" role=\"button\">\n                                            <i class=\"fa fa-clock-o\"></i>\n                                            <span class=\"small small-tag\">\n                                                <label>12:10 </label>\n                                            </span>\n                                        </div>\n                                        <div class=\"col-xs-12 text-xs-center\">\n                                            <p class=\"card-text fullWidth\">\n                                                <textarea id=\"txtStatus\" class=\"md-textarea\" v-bind:class=\"{'red-text':txtStatusCounter < 0}\" length=\"100\" v-model=\"txtStatus\"></textarea>\n                                                <label for=\"txtStatus\">Update current situation</label>\n                                            </p>\n                                        </div>\n                                        <hr style=\"width:100%\" />\n                                        <div class=\"col-xs-12\">\n                                            <label class=\"text-xs-right pull-right small\">\n                                                <sup>{{ txtStatusCounter }}</sup>\n                                            </label>\n                                            <a class=\"btn btn-success fullWidth\" v-bind:class=\"{'disabled':txtStatusCounter < 0}\">Update</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"row\">\n                            <div class=\"col-xs-12\">\n                                <p v-if=\"addSales\">In it to win it</p>\n                                <x-addSales v-if=\"addSales\"></x-addSales>\n                                <x-addEvent v-if=\"addEvent\"></x-addEvent>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                        ",
+            template: "\n                <div>\n                    <div class=\"row text-xs-center transparent\">\n                        <div v-if=\"!isAdd && !isRemove && isStatus\" class=\"col-xs-4 col-md-4\">\n                            <div class=\"card card-block hoverable waves-effect grey lighten-1\" role=\"button\">\n                                <p class=\"text-xs-center flex-center\">\n                                    Status\n                                </p>\n                            </div>\n                        </div>\n                        <div v-if=\"!isRemove\" class=\"col-xs-4 col-md-4\" v-bind:class=\"{'col-xs-12 col-md-12':isAdd}\">\n                            <div class=\"card card-block\" v-bind:class=\"{'white lighten-1':isAdd,'hoverable waves-effect':!isAdd}\" role=\"button\">\n                                <div v-if=\"!isAdd\" class=\"fullSize X_text-Green\" v-on:click=\"isAdd = !isAdd\">\n                                    <h3 class=\"text-xs-center flex-center\">\n                                        Add\n                                    </h3>\n                                </div>\n                                <div v-else>\n                                    <div class=\"row\">\n                                        <div class=\"col-xs-12\">\n                                            <a class=\"pull-right close red-text\" v-on:click=\"isAdd = !isAdd;addSales = false;addEvent = false\"><i class=\"fa fa-close red-text\"></i></a>\n                                            <h2>Add post</h2>\n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-success waves-effect black-text\" v-bind:class=\"{'z-depth-5':addEvent,'z-depth-0':!addEvent}\" v-on:click=\"addEvent = true;addSales = false;\">\n                                                Event\n                                            </a>\n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-success waves-effect black-text\" v-bind:class=\"{'z-depth-5':addSales,'z-depth-0':!addSales}\" v-on:click=\"addSales = true;addEvent = false;\">\n                                                Sales\n                                            </a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div v-if=\"!isAdd\" class=\"col-xs-4 col-md-4\" v-bind:class=\"{'col-xs-12 col-md-12':isRemove}\">\n                            <div class=\"card card-block\" v-bind:class=\"{'white lighten-1':isRemove,'hoverable waves-effect':!isRemove}\" role=\"button\">\n                                <div v-if=\"!isRemove\" class=\"fullSize red-text\" v-on:click=\"isRemove = !isRemove\">\n                                    <h3 class=\"text-xs-center flex-center\">\n                                        Remove\n                                    </h3>\n                                </div>\n                                <div v-else>\n                                    <div class=\"row\">\n                                       <div class=\"col-xs-12\">\n                                            <a class=\"pull-right close red-text\" v-on:click=\"isRemove = !isRemove;removeSales = false;removeEvent = false\"><i class=\"fa fa-close red-text\"></i></a>\n                                            <h2>Remove post</h2>\n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-success waves-effect black-text\" v-bind:class=\"{'z-depth-5':removeEvent,'z-depth-0':!removeEvent}\" v-on:click=\"removeEvent = true;removeSales = false;\">\n                                                Event\n                                            </a>\n                                        </div>\n                                        <div class=\"col-xs-6\">\n                                            <a class=\"btn btn-success waves-effect black-text\" v-bind:class=\"{'z-depth-5':removeSales,'z-depth-0':!removeSales}\" v-on:click=\"removeSales = true;removeEvent = false;\">\n                                                Sales\n                                            </a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>  \n                        </div>\n                        <!--Status text -->\n                        <div v-if=\"!isAdd && !isRemove && isStatus\" class=\"row\">\n                            <div class=\"col-xs-12 col-md-8 offset-md-2\">\n                                <div class=\"card card-block grey lighten-5\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xs-6 green-text\">\n                                            <label>Current status</label>\n                                        </div>\n                                        <div class=\"col-xs-6 pull-right text-xs-right\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Today\" role=\"button\">\n                                            <i class=\"fa fa-clock-o\"></i>\n                                            <span class=\"small small-tag\">\n                                                <label>12:10 </label>\n                                            </span>\n                                        </div>\n                                        <div class=\"col-xs-12 text-xs-center\">\n                                            <p class=\"card-text fullWidth\">\n                                                <textarea id=\"txtStatus\" class=\"md-textarea\" v-bind:class=\"{'red-text':txtStatusCounter < 0}\" length=\"100\" v-model=\"txtStatus\"></textarea>\n                                                <label for=\"txtStatus\">Update current situation</label>\n                                            </p>\n                                        </div>\n                                        <hr style=\"width:100%\" />\n                                        <div class=\"col-xs-12\">\n                                            <label class=\"text-xs-right pull-right small\">\n                                                <sup>{{ txtStatusCounter }}</sup>\n                                            </label>\n                                            <a class=\"btn btn-success fullWidth\" v-on:click=\"UpdateStatus\" v-bind:class=\"{'disabled':txtStatusCounter < 0}\">Update</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"row\">\n                            <div class=\"col-xs-12 col-sm-10 offset-sm-1\">\n                                <br />\n                                <x-addSales v-if=\"addSales\"></x-addSales>\n                                <x-addEvent v-if=\"addEvent\"></x-addEvent>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                        ",
             data: function () {
                 return {
                     isStatus: true,
@@ -493,9 +493,30 @@ $(document).ready(function () {
                     isRemove: false,
                     addSales: false,
                     addEvent: false,
+                    removeSales: false,
+                    removeEvent: false,
                     txtStatusCounter: 100,
                     brandStatus: ''
                 };
+            },
+            methods: {
+                UpdateStatus: function () {
+                    this.txtStatus;
+                    $.ajax({
+                        url: '/brand/r/UpdateStatus?Message=' + this.txtStatus,
+                        success: function (answer) {
+                            if (answer == "done") {
+                                toastr.success("Status updated");
+                            }
+                            else {
+                                toastr.error(answer);
+                            }
+                        },
+                        error: function () {
+                            toastr.error("System error : ghiweojpfq39t208uhvk");
+                        }
+                    });
+                }
             },
             computed: {
                 txtStatus: {
@@ -614,166 +635,6 @@ $(document).ready(function () {
                             }
                         }
                     });
-                }
-            }
-        });
-        Vue.component('x-addevent-sales', {
-            template: "<div>\n                    <div class=\"row card card-outline-success classic-admin-card\">\n                        <div class=\"col-xs-12\">\n                            <div class=\"card-block text-xs-center flex-center fullWidth\">\n                                <a class=\"btn btn-flat waves-button waves-effect fullWidth\" v-bind:class=\"{'grey lighten-2':ShowEvent_Sales}\" v-on:click=\"ShowEvent_SalesClick\"><span class=\"black-text\">+ Add Something New</span></a>\n                            </div>\n                        </div>\n                        <div class=\"col-xs-12 row\" v-if=\"ShowEvent_Sales\" v-bind:class=\"{'animated bounce':ShowEvent_Sales}\">\n                                <div class=\"col-xs-12 hidden-sm-up\">\n                                   <h3 class=\"text-xs-center\">Device screen size too small</h3>\n                                   <p class=\"text-xs-center\">                                 \n                                        <a class=\"btn btn-flat waves-button waves-effect\"><i class=\"fa fa-2x fa-mobile red-text\"></i></a>\n                                        <a class=\"btn waves-button btn-flat waves-effect\"><i class=\"fa fa-2x fa-tablet teal-text\"></i></a>\n                                        <a class=\"btn waves-button btn-flat waves-effect\"><i class=\"fa fa-2x fa-laptop teal-text\"></i></a>\n                                        <a class=\"btn waves-button btn-flat waves-effect\"><i class=\"fa fa-2x fa-desktop teal-text\"></i></a>\n                                   </p>\n                                </div>\n\n                                <div class=\"col-sm-6 hidden-xs-down\">\n                                    <div class=\"card-block text-xs-center flex-center\">\n                                        <a class=\"btn btn-flat waves-button waves-effect\" v-bind:class=\"{'grey lighten-2':ShowAddEvent}\" v-on:click=\"ShowAddEventClick\">\n                                            <span class=\"black-text\">Event</span>\n                                        </a>\n                                    </div>\n                                </div>\n\n                                <div class=\"col-sm-6 hidden-xs-down\">\n                                    <div class=\"card-block text-xs-center flex-center\">\n                                        <a class=\"btn btn-flat waves-button waves-effect\" v-bind:class=\"{'grey lighten-2':ShowAddSales}\" v-on:click=\"ShowAddSalesClick\">\n                                            <span class=\"black-text\">Sale</span>\n                                        </a>\n                                    </div>\n                                </div>\n                        </div>\n                    </div>\n\n                    <div class=\"row card\" v-if=\"ShowAddSales && ShowEvent_Sales\" v-bind:class=\"{'animated rotateInDownRight':ShowAddSales}\">\n                          <div class=\"col-xs-12 row\">\n                               <div class=\"col-md-6\">\n                                    <div class=\"image-editor row depth-z-0 center text-xs-center\">\n                                         <div class=\"file-field text-xs-center col-md-6 offset-md-3\">\n                                                <div role=\"button\" class=\"btn btn-primary center text-xs-center btn-sm waves-effect\">\n                                                    <span>Select Image to Upload</span>\n                                                    <input type=\"file\" accept=\"image/*\" v-on:click=\"AttachCropIt\" class=\"cropit-image-input\" />\n                                                </div>\n                                         </div>\n                                     </div>\n                                     <div class=\"md-form form-group\">\n                                         <textarea class=\"md-textarea\" v-model=\"Sales_Description\" v-bind:class=\"{'invalid':SalesDescriptionError,'valid':!SalesDescriptionError}\" length=\"20\"></textarea>\n                                    </div>\n                                    <hr />\n                                    <div class=\"md-form input-group\">\n                                        <span class=\"input-group-addon\">R</span>\n                                        <input type=\"number\" v-model.number=\"Sales_Price\" v-bind:class=\"{'invalid':SalesPriceError,'valid':!SalesPriceError}\" class=\"form-control\" length=\"4\" aria-label=\"Amount (to the nearest Rand)\">\n                                        <span class=\"input-group-addon\">.00</span>\n                                    </div>\n                                    <hr />\n                                    <div class=\"md-form\">\n                                        <select class=\"mdb-select\" v-model=\"SalesCategory\">\n                                            <optgroup label=\"Music\">\n                                                <option value=\"Album Launch\">Album Launch</option>\n                                                <option value=\"Artist Birthday\">Artist Birthday</option>\n                                            </optgroup>\n                                            <optgroup label=\"Fashion\">\n                                                <option value=\"Fashion Show\">Fashion Show</option>\n                                                <option value=\"Just Nje!\">Just Nje!</option>\n                                            </optgroup>\n                                        </select>\n                                        <label>Event Type</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-md-6\">\n                                        <div class=\"card narrower\">\n                                            <div class=\"card-title\">\n                                                <div class=\"Post_Header row\">\n                                                    <div class=\"Post_Header_Img col-xs-1 text-xs-left left\">\n                                                        <img v-bind:src=\"LoggedInBrand.Logo\" style=\"width:100%;height:100%\" id=\"TheImage\" class=\"img-fluid\" />\n                                                    </div>\n                                                    <div class=\"Post_Header_Left col-xs-9 row\">\n                                                        <div class=\"col-xs-12 text-xs-left\">\n                                                            <h4 class=\"h4-responsive\"><a>{{ LoggedInBrand.Name }}</a></h4>\n                                                        </div>\n                                                        <div class=\"col-xs-12 text-xs-left\">\n                                                            <span><a>{{ LoggedInBrand.Category }}</a></span> <i class=\"fa fa-dot-circle-o\"></i> {{ SalesCategory }} Event\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"Post_Header_Right col-xs-2 text-xs-right right\">\n                                                        <div class=\"tag tag-danger\">NEW</div>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                            <div class=\"pull-xs-right\" style=\"border:1px solid black\">\n                                                 <div style=\"width:20px;height:20px\" v-on:click=\"DescriptionText(false)\" class=\"white waves-effect col-xs-1\" role=\"button\"></div>\n                                                 <div style=\"width:20px;height:20px\" v-on:click=\"DescriptionText(true)\" class=\"black waves-effect col-xs-1\" role=\"button\"></div> \n                                            </div>\n                                            <form class=\"range-field\">\n                                                 <input id=\"TheZoomer\" type=\"range\" />\n                                            </form>\n                                            <a class=\"rotate-ccw ImageEdit btn-floating transparent waves-effect pull-xs-left\" onclick=\"{$('.image-editor').cropit('rotateCCW');}\"><i class=\"fa fa-rotate-left black-text\"></i></a>\n                                            <a class=\"rotate-cw ImageEdit btn-floating transparent waves-effect pull-xs-right\" onclick=\"{$('.image-editor').cropit('rotateCW');}\"><i class=\"fa fa-rotate-right black-text\"></i></a>\n                                            <div id=\"ThepicX\" v-bind:class=\"{'hm-white-strong':DescriptionTextColour,'hm-black-strong':!DescriptionTextColour}\" class=\"view hm-zoom overlay text-xs-center flex-center waves-effect\">\n                                                <img style=\"width:100%;height:100%\" class=\"img-fluid \" alt=\"\">\n                                                <div class=\"mask flex-center\">\n                                                    <p v-bind:class=\"{'black-text':DescriptionTextColour,'white-text':!DescriptionTextColour}\">{{ Sales_Description }}</p>\n                                                </div>\n                                            </div>\n                                          \n                                            <div class=\"card-share\">\n                                                <div class=\"social-reveal\">\n                                                    <a type=\"button\" class=\"btn-floating btn-fb\"><i class=\"fa fa-facebook\"></i></a>\n                                                    <a type=\"button\" class=\"btn-floating btn-tw\"><i class=\"fa fa-twitter\"></i></a>\n                                                    <a type=\"button\" class=\"btn-floating btn-gplus\"><i class=\"fa fa-instagram\"></i></a>\n                                                </div>\n                                                <a class=\"btn-floating btn-action share-toggle white\"><i class=\"fa fa-share-alt black-text\"></i></a>\n                                            </div>\n                                            <div class=\"card-link row Post_Footer\">\n                                                <div class=\"col-xs-3\">\n                                                    <a class=\"btn btn-floating btn-small waves-effect waves-circle transparent activator\"><i class=\"fa fa-phone green-text animated tada infinite\"></i></a>\n                                                </div>\n                                                <div class=\"col-xs-6 center text-xs-center animated pulse infinite\">\n                                                    <span class=\"center tag tag-danger\">\n                                                        <span>R</span> {{ Sales_Price }}\n                                                    </span>\n                                                </div>\n                                            </div>\n                                            <div class=\"card-reveal\">\n                                                <div class=\"content text-xs-center\">\n                                                    <h4 class=\"card-title\">Social shares <i class=\"fa fa-close\"></i></h4>\n                                                    <hr>\n                                                </div>\n                                            </div>\n                                         </div>\n                                    </div>\n                        </div>\n                        <div class=\"col-xs-12\">\n                            <a class=\"btn teal waves-effect waves-button export ImageEdit\" style=\"width:100%\" onclick=\"{ var imageData = $('.image-editor').cropit('export'); window.open(imageData); }\">Save Changes</a>\n                        </div>\n                    </div>\n\n                    </div>",
-            data: function () {
-                return {
-                    TxtEventLineup: '',
-                    Lineup: ['Uzzie', 'Joe', 'Me'],
-                    post: PostCard,
-                    DescriptionTextColour: true,
-                    ShowAddEvent: false,
-                    ShowAddSales: false,
-                    ShowEvent_Sales: false,
-                    EventName: 'Name of event...',
-                    EventNameError: false,
-                    EventDate: '',
-                    EventPrice: '0',
-                    EventPriceError: '0',
-                    EventCategory: '',
-                    SalesDescription: 'Describe your product...',
-                    SalesDescriptionError: false,
-                    SalesPrice: '0',
-                    SalesPriceError: '0',
-                    SalesCategory: '',
-                    SalesImage: '',
-                    LoggedInBrand: Brand
-                };
-            },
-            computed: {
-                Event_Name: {
-                    get: function () {
-                        return this.EventName;
-                    },
-                    set: function (val) {
-                        if (val.length > 20) {
-                            this.EventNameError = true;
-                        }
-                        else if (val.length <= 0) {
-                            this.EventNameError = true;
-                        }
-                        else {
-                            this.EventNameError = false;
-                            this.EventName = val;
-                        }
-                    },
-                },
-                Event_Price: {
-                    get: function () {
-                        return this.EventPrice;
-                    },
-                    set: function (val) {
-                        if (val.length > 4) {
-                            this.EventPriceError = true;
-                        }
-                        else if (val.length <= 0) {
-                            this.EventPrice = 0;
-                            this.EventPriceError = true;
-                        }
-                        else {
-                            this.EventPriceError = false;
-                            this.EventPrice = val;
-                        }
-                    },
-                }, Sales_Description: {
-                    get: function () {
-                        return this.SalesDescription;
-                    },
-                    set: function (val) {
-                        if (val.length > 20) {
-                            this.SalesDescriptionError = true;
-                        }
-                        else if (val.length <= 0) {
-                            this.SalesDescriptionError = true;
-                        }
-                        else {
-                            this.SalesDescriptionError = false;
-                            this.SalesDescription = val;
-                        }
-                    },
-                },
-                Sales_Price: {
-                    get: function () {
-                        return this.SalesPrice;
-                    },
-                    set: function (val) {
-                        if (val.length > 4) {
-                            this.SalesPriceError = true;
-                        }
-                        else if (val.length <= 0) {
-                            this.SalesPrice = 0;
-                            this.SalesPriceError = true;
-                        }
-                        else {
-                            this.SalesPriceError = false;
-                            this.SalesPrice = val;
-                        }
-                    },
-                }
-            },
-            mounted: function () {
-            },
-            methods: {
-                AddToLineup: function () {
-                    var value = this.TxtEventLineup;
-                    if (value.length > 3) {
-                        this.Lineup.push(value);
-                        this.TxtEventLineup = '';
-                    }
-                },
-                RemoveCurrentLineup: function (value) {
-                    var index = this.Lineup.indexOf(value);
-                    if (index > 0) {
-                        this.Lineup.splice(index, 1);
-                    }
-                },
-                DescriptionText: function (color) {
-                    this.DescriptionTextColour = color;
-                },
-                AttachCropIt: function () {
-                    $('.image-editor').cropit({
-                        maxZoom: 2,
-                        imageBackground: true,
-                        imageState: {
-                            src: '/Content/images/avatars/img (10).jpg',
-                        },
-                        smallImage: 'allow',
-                        width: 410,
-                        height: 290,
-                        freeMove: true,
-                        $preview: $('#ThepicX'),
-                        $zoomSlider: $('#TheZoomer'),
-                        onZoomDisabled: function () {
-                            $('#TheZoomer').hide('slow');
-                        },
-                        onZoomEnabled: function () {
-                            $('#TheZoomer').show('slow');
-                        }
-                    });
-                },
-                ShowAddEventClick: function () {
-                    this.ShowAddEvent = !this.ShowAddEvent;
-                    this.ShowAddSales = false;
-                    Vue.nextTick(function () {
-                        $(window).resize();
-                        Initialize();
-                    });
-                },
-                ShowAddSalesClick: function () {
-                    this.ShowAddSales = !this.ShowAddSales;
-                    this.ShowAddEvent = false;
-                    var self = this;
-                    Vue.nextTick(function () {
-                        self.AttachCropIt();
-                        Initialize();
-                    });
-                },
-                ShowEvent_SalesClick: function () {
-                    this.LoggedInBrand = LoggedInBrand;
-                    this.ShowEvent_Sales = !this.ShowEvent_Sales;
                 }
             }
         });

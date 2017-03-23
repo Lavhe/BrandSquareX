@@ -221,6 +221,24 @@ namespace BrandSquare.Controllers
             return View("Brand_Index", brand);
         }
 
+        public string UpdateStatus(string Message)
+        {
+            var brand = X.GetBrand<Brand>(Session, true);
+            if (brand != null)
+            {
+                try
+                {
+                    BrandSqaureX.Status.Add(new Status() { BrandID = brand.BrandID, DateTimePosted = X.FormatDateTime(DateTime.Now), Status1 = Message });
+                    BrandSqaureX.SaveChanges();
+                }
+                catch (Exception ex) {
+                    return "Unable to save you status, Try again later";
+                }
+                return "done";
+            }
+            return "You are not logged in";
+        }
+
         public ActionResult Events(string brandName)
         {
             Brand brand = null;

@@ -14,6 +14,7 @@ namespace BrandSquare.Models
         {
             Events = new HashSet<Event>();
             Sales = new HashSet<Sale>();
+            Status = new HashSet<Status>();
         }
 
         public int BrandID { get; set; }
@@ -32,7 +33,7 @@ namespace BrandSquare.Models
 
         public int BrandCategoryID { get; set; }
 
-        [Column(TypeName = "text")]
+        [StringLength(100)]
         public string BrandPassword { get; set; }
 
         [Column(TypeName = "text")]
@@ -47,5 +48,8 @@ namespace BrandSquare.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Status> Status { get; set; }
     }
 }

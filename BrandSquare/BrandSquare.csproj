@@ -160,6 +160,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\SocialMedia.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
